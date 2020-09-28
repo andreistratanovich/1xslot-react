@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Layout, Space, Typography, Tag } from "antd";
+import { LikeOutlined } from "@ant-design/icons";
+import "antd/dist/antd.css";
+import Products from "./components/Products";
+import Cart from "./components/Cart";
+import data from "./data/mergedData";
 
-function App() {
+const exchangeRate = 76.82;
+
+export default () => {
+  const [cart, setCart] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout style={styles.Layout}>
+      <Space size="middle">
+        <Typography.Title>
+          <LikeOutlined /> 1XSLOT
+        </Typography.Title>
+        <Tag color="gold">Тестовое задание</Tag>
+      </Space>
+      <Products data={data} cartState={{ cart, setCart }} exchangeRate={exchangeRate} />
+      <Cart cartState={{ cart, setCart }} exchangeRate={exchangeRate} />
+    </Layout>
   );
-}
+};
 
-export default App;
+const styles = {
+  Layout: {
+    minHeight: "100vh",
+    padding: "35px 30px",
+  },
+};
